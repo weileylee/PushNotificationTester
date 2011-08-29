@@ -1,5 +1,5 @@
 var UA = {};
-UA.HOST = "https://go.urbanairship.com/";
+UA.HOST = "https://go.urbanairship.com:443/"; //TODO: figure out why we need to specify the port number here?
 UA.APP_KEY = "BH8OW8AVR8-4YHZya5RlFw";
 UA.APP_SECRET = "W-p8HmuVQVC3A-20nptpsw";
 
