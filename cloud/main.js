@@ -1,5 +1,5 @@
 var UA = {};
-UA.HOST = "https://go.urbanairship.com:443/";
+UA.HOST = "https://go.urbanairship.com/";
 UA.APP_KEY = "BH8OW8AVR8-4YHZya5RlFw";
 UA.APP_SECRET = "W-p8HmuVQVC3A-20nptpsw";
 
