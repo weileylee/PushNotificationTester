@@ -7,7 +7,7 @@ function registerUA(){
   var deviceToken = $params.deviceToken;
   $fh.log({message: 'receive deviceToken : ' + deviceToken});
   var url = UA.HOST + "api/device_tokens/" + deviceToken;
-  var res = $fh.web({url: url, method:'PUT', auth:{username:UA.APP_KEY, password:UA.APP_SECRET}});
+  var res = $fh.web({url: url, method:'PUT', auth:{username:UA.APP_KEY, password:UA.APP_SECRET}, timeout: 5000});
   $fh.log({message:'UA register response : ' + $fh.stringify(res)});
   var status = res.status;
   if(status == 200 || status == 201){
