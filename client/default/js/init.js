@@ -1,8 +1,9 @@
 
 
 $fh.ready({}, function(){
-  $fh.push({act:'receive'}, receive_push, function(err){
-    alert(err);
+  $fh.push({act:'receive'}, function(notification){
+    receive_push(notification);
+  }, function(err){
   })
 })
 
