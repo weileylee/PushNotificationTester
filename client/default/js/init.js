@@ -22,6 +22,7 @@ var receive_push = function (notification) {
 
 // when APN register succeeded
 function successCallback(e) {
+  if(e.deviceToken){
     result.innerHTML="Device registered. Device token:<br>" + e.deviceToken + '.<br><br>';
     result.innerHTML += "Now registering with UrbanAirship...";
     $fh.act({act:'registerUA', req:{deviceToken: e.deviceToken}}, function(res){
@@ -31,6 +32,9 @@ function successCallback(e) {
         result.innerHTML += "Error when registering with UrbanAirship.<br>";
       }
     })
+  } else if(e.apid){
+    result.innerHTML="Device registered. Push Id:<br>" + e.apid + '.<br><br>';
+  }
 }
 
 // when APN register failed
