@@ -1,4 +1,6 @@
-
+var bb_push_port = 30308;
+var bb_push_appId = "80303-s67ll735e3D0576O61a27D6441h63l6476";
+var bb_push_serverUrl = "http://pushapi.eval.blackberry.com";
 
 $fh.ready({}, function(){
   $fh.push({act:'receive'}, function(notification){
@@ -22,10 +24,10 @@ var receive_push = function (notification) {
 
 // when APN register succeeded
 function successCallback(e) {
-  if(e.deviceToken){
-    result.innerHTML="Device registered. Device token:<br>" + e.deviceToken + '.<br><br>';
+  if(e.deviceToken || e.devicePIN){
+    result.innerHTML="Device registered. Device token:<br>" + e.deviceToken || e.devicePIN + '.<br><br>';
     result.innerHTML += "Now registering with UrbanAirship...";
-    $fh.act({act:'registerUA', req:{deviceToken: e.deviceToken}}, function(res){
+    $fh.act({act:'registerUA', req:e}, function(res){
       if(res.result == 'ok'){
         result.innerHTML += "Registration Finishied.<br>";
       } else {
@@ -34,12 +36,13 @@ function successCallback(e) {
     })
   } else if(e.apid){
     result.innerHTML="Device registered. Push Id:<br>" + e.apid + '.<br><br>';
-  }
+  } 
 }
 
 // when APN register failed
 function errorCallback(e) {
-    result.innerHTML='Error during registration: '+e.error;
+    alert(e);
+    result.innerHTML='Error during registration: ' + e;
     registerButton.disabled=false;
 }
 
@@ -48,5 +51,5 @@ function registerAPN() {
     registerButton.disabled=true;
     result.innerHTML='Registering...';
     
-    $fh.push({act:'register'}, successCallback, errorCallback);
+    $fh.push({act:'register', params:{bb:{port:bb_push_port, appId:bb_push_appId, serverUrl: bb_push_serverUrl}}}, successCallback, errorCallback);
 }
